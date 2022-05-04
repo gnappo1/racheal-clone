@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # namespace :api do
-  #   resources :recipes, only: [:index, :create]
+     resources :movies, except: [:new, :edit]
+     resources :watchlists, only: [:index, :show, :create]
   #   post "/signup", to: "users#create"
   #   get "/me", to: "users#show"
   #   post "/login", to: "sessions#create"
