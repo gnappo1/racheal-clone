@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2022_05_03_212748) do
     t.string "email"
     t.string "password_digest"
     t.string "username"
-    t.integer "role_id"
+    t.integer "role", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

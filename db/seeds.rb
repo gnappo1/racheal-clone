@@ -5,3 +5,24 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+puts "🌱 Creating users..."
+mike = User.create(email: "mike@yahoo.com", password: "mike123456", username: "Mikeymike")
+racheal = User.create(email: "racheal@yahoo.com", password: "racheal123456", username: "Racheal", role: 1)
+jeni = User.create(email: "jeni@yahoo.com", password: "jeni123456", username: "Jenicute")
+matteo = User.create(email: "matteo@yahoo.com", password: "matteo123456", username: "Matteo")
+
+puts "🌱 Creating movies..."
+movie1 = Movie.create(title: "Ruby project", image_url: "https://youtu.be/W--eIMVr350", genre: "project", plot: "This is a Sinatra base react project", total_time: "7:46")
+movie2 = Movie.create(title: "react js", image_url: "https://youtu.be/bV9-Lnt6aEw", genre: "project", plot: "This project was bootstrapped with Create React App for the Frontend and a Json server template for the backend. This project consist of over 20 components, a RESTful API and over 5 client-side Routes using react-router and navigation links", total_time: "6:24")
+movie3 = Movie.create(title: "react app project", image_url: "https://youtu.be/yjC81tnqRbE", genre: "project", plot: "This is a react app single page application project, it consist of 5 components, 3 client side routes using the react router.
+I used JSON server to create a restful API for my backend and I made use of get, post, delete and patch methods request to JSON.", total_time: "3:12")
+movie4 = Movie.create(title: "Javascript project", image_url: "https://youtu.be/JQQ6QTu76Gw", genre: "project", plot: "Its a single page website that is built with HTML, CSS, JavaScript. it retrieves data from a public API and also uses JSON as the communication format.", total_time: "2:12")
+
+
+puts "🌱 Creating watchlists..."
+Watchlist.create(user_id: mike.id, movie_id: movie1.id, rating: 3, comment: "this is a nice movie")
+Watchlist.create(user_id: racheal.id, movie_id: movie2.id, rating: 5, comment: "Has alot of suspense")
+Watchlist.create(user_id: jeni.id, movie_id: movie3.id, rating: 2, comment: "The movie didn't end well at all")
+Watchlist.create(user_id: matteo.id, movie_id: movie4.id, rating: 1, comment: "I wouldn't recommend this movie to anyone")
+
+puts "🌱 Seeding done!"
