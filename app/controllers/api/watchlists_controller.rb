@@ -1,7 +1,7 @@
-class WatchlistsController < ApplicationController
+class Api::WatchlistsController < ApplicationController
 
     def index
-        watchlists = Movie.all
+        watchlists = Watchlist.all
         render json: watchlists
     end
 
