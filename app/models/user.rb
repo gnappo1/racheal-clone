@@ -2,7 +2,8 @@ class User < ApplicationRecord
     enum role: [:guest, :admin]
     #or enum role: %i(volunteer admin)
     has_many :watchlists,  dependent: :destroy
-    has_many :movies, through: :watchlists
+    has_many :watched_movies, through: :watchlists, source: :movie 
+    has_many :created_movies, class_name: "Movie", foreign_key: :creator_id
 
      # password security
      has_secure_password

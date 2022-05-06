@@ -1,4 +1,6 @@
 class Api::MoviesController < ApplicationController
+   before_action :check_admin, except: [:index, :show]
+    skip_before_action :authorize, only: [:index, :show]
 
     def index
         movies = Movie.all
@@ -32,4 +34,8 @@ class Api::MoviesController < ApplicationController
     def movie_params
         params.permit(:title, :image_url, :genre, :plot, :total_time)
     end
+
+  def check_admin
+    render json: { errors: ["Not authorized"] }, status: :unauthorized unless @current_user.admin?
+  end
 end
