@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2022_05_06_151111) do
     t.string "genre"
     t.string "plot"
     t.string "total_time"
+    t.integer "view"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "creator_id", null: false

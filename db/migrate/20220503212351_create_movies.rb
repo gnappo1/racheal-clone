@@ -6,6 +6,7 @@ class CreateMovies < ActiveRecord::Migration[6.1]
       t.string :genre
       t.string :plot
       t.string :total_time
+      t.integer :view
 
       t.timestamps
     end
