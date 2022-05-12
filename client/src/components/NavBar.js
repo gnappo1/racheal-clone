@@ -18,8 +18,11 @@ function NavBar({ user, setUser }) {
         <Link to="/">Reciplease</Link>
       </Logo>
       <Nav>
-        <Button as={Link} to="/new">
-          New Recipe
+      <Button as={Link} to="/movies">
+          Movies
+        </Button>
+        <Button as={Link} to="/movies/new">
+          New Movie
         </Button>
         <Button variant="outline" onClick={handleLogoutClick}>
           Logout

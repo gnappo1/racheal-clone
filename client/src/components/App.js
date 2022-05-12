@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 import Login from "../pages/Login";
-
-import NewRecipe from "../pages/NewRecipe";
+import MovieForm from "./MovieForm";
 import MoviesContainer from "../containers/MoviesContainer";
 import MoviesCard from "./MoviesCard";
 
@@ -26,10 +25,10 @@ function App() {
       <NavBar user={user} setUser={setUser} />
       <main>
         <Switch>
-          {/* <Route path="/new">
-            <NewRecipe user={user} />
+          <Route path="/movies/new">
+            <MovieForm />
           </Route>
-           */}
+          
           <Route path="/movies/:id">
             <MoviesCard />
           </Route>

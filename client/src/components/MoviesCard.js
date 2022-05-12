@@ -9,8 +9,9 @@ function MoviesCard({movie, deleteMovie}) {
     const {id} = useParams()
     const location = useLocation()
     const [movieObj, setMovieObj] = useState(null);
-   // const history = useHistory()
-    const [watchlists, setWatchlists] = useState([])
+    const [edit, setEdit] = useState(false);
+    const history = useHistory()
+    // const [watchlists, setWatchlists] = useState([])
 
     useEffect(() => {   
         if (!movie) {
@@ -22,9 +23,14 @@ function MoviesCard({movie, deleteMovie}) {
         }
     }, [movie, id]);
 
-    const addNewWatchlist = (watchlistObj) => {
-        setWatchlists(currentWatchlists => [watchlistObj, ...currentWatchlists])
-    }
+    const handleUpdate = (updatedMovieObj) => {
+        setEdit(false)
+        setMovieObj(updatedMovieObj)
+  }
+
+    // const addNewWatchlist = (watchlistObj) => {
+    //     setWatchlists(currentWatchlists => [watchlistObj, ...currentWatchlists])
+    // }
 
     const finalMovie = movie ? movie : movieObj
     if (!finalMovie) return <h1>Loading...</h1>
@@ -44,13 +50,16 @@ function MoviesCard({movie, deleteMovie}) {
     <div>
          {finalMovie.image_url ? <YoutubeEmbed embedId={finalMovie.image_url} alt="Something went wrong" /> : null}
          <h3>Title: <Link to={`/movies/${finalMovie.id}`}>{finalMovie.title}</Link></h3>
-         {location.pathname !== "/movies" ? (<>
+         {location.pathname !== "/movies" ? <>
+          <button name="delete" id="delete-btn" onClick={handleDelete}>Delete</button>
+        </> : null}
+         {/* {location.pathname !== "/movies" ? (<>
           <WatchlistForm addNewWatchlist={addNewWatchlist} movieId={finalMovie.id} />
           <br />
         <hr />
         <hr />
           <Watchlistlists watchlists={watchlists} />
-        </>) : null }
+        </>) : null } */}
     </div>
   )
 }
