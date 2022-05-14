@@ -13,7 +13,7 @@ class Api::MoviesController < ApplicationController
     end
 
     def create
-        movie = Movie.create!(movie_params)
+        movie = @current_user.created_movies.create!(movie_params)
         render json: movie, status: :created
     end
 
@@ -32,7 +32,7 @@ class Api::MoviesController < ApplicationController
     private
 
     def movie_params
-        params.permit(:title, :image_url, :genre, :plot, :total_time)
+        params.require(:movie).permit(:title, :image_url, :genre, :plot, :total_time)
     end
 
   def check_admin

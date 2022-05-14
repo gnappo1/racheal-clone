@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import MoviesLists from '../components/MoviesLists';
+import "../components/styles.css"
 
 function MoviesContainer() {
     const [movies, setMovies] = useState([]);
@@ -18,8 +19,7 @@ function MoviesContainer() {
           console.log(movies)
     }
   return (
-    <div>
-         <h2>Movies</h2>
+    <div className='movie-container'>
     <MoviesLists movies={movies} deleteMovie={deleteMovie} />
     </div>
   )

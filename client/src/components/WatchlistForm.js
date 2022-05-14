@@ -1,7 +1,7 @@
 import {useState} from 'react'
-import {useHistory} from "react-router-dom"
+// import {useHistory} from "react-router-dom"
 
-function WatchlistForm({movieId, addNewWatchlist}) {
+function WatchlistForm({movieId}) {
     const [watchlist, setWatchlist] = useState({
         rating: "",
         comment: "",
@@ -20,7 +20,7 @@ function WatchlistForm({movieId, addNewWatchlist}) {
             alert("you must fill in all the information please!")
         }
 
-        fetch(`http://localhost:4000/movies/${movieId}/watchlists`, {
+        fetch(`/api/movies/${movieId}/watchlists`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -31,7 +31,9 @@ function WatchlistForm({movieId, addNewWatchlist}) {
             if (resp.status === 201) {
                 resp.json()
                 .then(watchlist => {
-                    addNewWatchlist(watchlist)
+                    debugger
+                    //addNewWatchlist(watchlist)
+
                     setWatchlist({rating: "", comment: ""})
 
                 })
@@ -39,7 +41,7 @@ function WatchlistForm({movieId, addNewWatchlist}) {
                 resp.json()
                 .then(errorObj => {
                     alert(errorObj.error)
-                    setWatchlist({rating: "", comment: ""})
+                    //setWatchlist({rating: "", comment: ""})
                 })
             }
         })
@@ -47,7 +49,7 @@ function WatchlistForm({movieId, addNewWatchlist}) {
     }
   return (
     <div>
-        <h3></h3>
+        <h4> Create a new comment</h4>
         <form onSubmit={handleSubmit}>
         <label htmlFor="rating">Rating</label>
                 <input onChange={handleChange} type="number" name="rating" value={watchlist.rating} required/><br />

@@ -1,5 +1,5 @@
 class MovieSerializer < ActiveModel::Serializer
-  attributes :id, :title, :image_url, :plot, :total_time #, :summary
+  attributes :id, :title, :image_url, :plot, :total_time , :comments #, :summary
 
   has_many :watchlists
 

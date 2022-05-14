@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react"
 import {Link, useParams, useLocation, useHistory} from "react-router-dom"
-import Watchlistlists from "./Watchlistlists"
-import WatchlistForm from "./WatchlistForm"
+ import WatchlistForm from "./WatchlistForm"
+//import EditMovie from "./EditMovie"
 import "./styles.css"
 import YoutubeEmbed from "./YoutubeEmbed"
 
@@ -11,7 +11,7 @@ function MoviesCard({movie, deleteMovie}) {
     const [movieObj, setMovieObj] = useState(null);
     const [edit, setEdit] = useState(false);
     const history = useHistory()
-    // const [watchlists, setWatchlists] = useState([])
+    const [watchlists, setWatchlists] = useState([])
 
     useEffect(() => {   
         if (!movie) {
@@ -23,14 +23,13 @@ function MoviesCard({movie, deleteMovie}) {
         }
     }, [movie, id]);
 
-    const handleUpdate = (updatedMovieObj) => {
-        setEdit(false)
-        setMovieObj(updatedMovieObj)
+    const handleUpdate = () => {
+        setEdit(true)
   }
 
-    // const addNewWatchlist = (watchlistObj) => {
-    //     setWatchlists(currentWatchlists => [watchlistObj, ...currentWatchlists])
-    // }
+     const addNewWatchlist = (watchlistObj) => {
+         setWatchlists(currentWatchlists => [watchlistObj, ...currentWatchlists])
+     }
 
     const finalMovie = movie ? movie : movieObj
     if (!finalMovie) return <h1>Loading...</h1>
@@ -39,29 +38,42 @@ function MoviesCard({movie, deleteMovie}) {
         fetch(`/api/movies/${movie.id}`, {
           method: "DELETE",
         })
-          .then(r => r.json())
-          .then(data => {
+          .then(() => history.push("/movies"))
     
             deleteMovie(movie.id)
-            console.log(data, 'deleted item')
-          });
       }
   return (
-    <div>
+    <div className="movie-card">
+       
          {finalMovie.image_url ? <YoutubeEmbed embedId={finalMovie.image_url} alt="Something went wrong" /> : null}
-         <h3>Title: <Link to={`/movies/${finalMovie.id}`}>{finalMovie.title}</Link></h3>
+         {/* <h4> view:{finalMovie.view}</h4> */}
+         <h4>Title: <Link style= {{textDecoration: "none", color: "black"}} to={`/movies/${finalMovie.id}`}>{finalMovie.title}</Link></h4>
+        
+         
          {location.pathname !== "/movies" ? <>
-          <button name="delete" id="delete-btn" onClick={handleDelete}>Delete</button>
-        </> : null}
-         {/* {location.pathname !== "/movies" ? (<>
-          <WatchlistForm addNewWatchlist={addNewWatchlist} movieId={finalMovie.id} />
-          <br />
-        <hr />
-        <hr />
-          <Watchlistlists watchlists={watchlists} />
-        </>) : null } */}
+         <Link to={`/movies/${finalMovie.id}/edit`}> 
+         <button name="edit" id="edit-btn" onClick={() => setEdit(edit)}>Edit</button></Link>
+         <button name="delete" id="delete-btn" onClick={handleDelete}>Delete</button>
+         <h3>Comments:  </h3>
+         <WatchlistForm movieId={finalMovie.id} addNewWatchlist={addNewWatchlist} />
+         
+         <ul>{finalMovie.comments.map((comment) => (
+             <li>
+                 <h5>Rating: {comment.rating}</h5>
+                 <h5>Comment: {comment.comment}</h5>
+             </li>
+         ))}
+         </ul>
+         </> : null }
+        
     </div>
   )
 }
 
-export default MoviesCard
+export default MoviesCard      
+          
+    
+        
+          
+    
+    

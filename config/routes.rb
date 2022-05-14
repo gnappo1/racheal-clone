@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
    namespace :api do
-     resources :movies
-     resources :watchlists, only: [:create]
-     resources :users, only: [:index, :update, :destroy]
+     resources :movies do 
+      resources :watchlists, only: [:create]
+     end
+     resources :users, only: [:update, :destroy]
     post "/signup", to: "users#create"
     get "/me", to: "users#show"
     post "/login", to: "sessions#create"

@@ -5,4 +5,8 @@ class Movie < ApplicationRecord
 
     validates :title, :image_url, :genre, :total_time, presence: true
     validates :plot, length: { maximum: 500 }
+
+    def comments
+        self.watchlists.map{|w| {rating: w.rating, comment: w.comment}}
+    end
 end

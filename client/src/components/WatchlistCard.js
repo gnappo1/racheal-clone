@@ -6,7 +6,7 @@ function WatchlistCard({watchlist}) {
     const [watchlistObj, setWatchlistObj] = useState(null);
     useEffect(() => {   
         if (!watchlist) {
-            fetch(`http://localhost:4000/watchlists/${id}`)
+            fetch(`/api/watchlists/${id}`)
             .then(resp => resp.json())
             .then(watchlist => setWatchlistObj(watchlist))
         }

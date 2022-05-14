@@ -8,7 +8,7 @@ function Watchlistlists({watchlists}) {
 
     useEffect(() => {
         if (!watchlists) {
-            fetch(`http://localhost:4000/movies/${movieId}/watchlists`)
+            fetch(`/api/${movieId}/watchlists`)
             .then(resp => {
                 if (resp.status === 200) {
                     resp.json()

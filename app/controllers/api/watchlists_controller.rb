@@ -11,8 +11,15 @@ class Api::WatchlistsController < ApplicationController
     end
 
     def create
-        watchlist = Watchlist.create!(watchlist_params)
+        movie = Movie.find(params[:movie_id])
+        watchlist = Watchlist.find_by(movie: movie, user: @current_user)
+        if watchlist
+            watchlist.update!(watchlist_params)
+        else
+            watchlist = @current_user.watchlists.create!(movie: movie, rating: params[:rating], comment: params[:comment])
+        end
         render json: watchlist, status: :created
+
     end
 
     private

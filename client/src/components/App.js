@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import MovieForm from "./MovieForm";
 import MoviesContainer from "../containers/MoviesContainer";
 import MoviesCard from "./MoviesCard";
+import EditMovies from "./EditMovie";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -28,7 +29,9 @@ function App() {
           <Route path="/movies/new">
             <MovieForm />
           </Route>
-          
+          <Route path="/movies/:id/edit">
+            <EditMovies />
+          </Route>
           <Route path="/movies/:id">
             <MoviesCard />
           </Route>

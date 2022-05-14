@@ -15,11 +15,11 @@ function NavBar({ user, setUser }) {
   return (
     <Wrapper>
       <Logo>
-        <Link to="/">Reciplease</Link>
+        <Link to="/">Movie App</Link>
       </Logo>
       <Nav>
       <Button as={Link} to="/movies">
-          Movies
+        Movies
         </Button>
         <Button as={Link} to="/movies/new">
           New Movie
