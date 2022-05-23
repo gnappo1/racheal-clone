@@ -6,6 +6,7 @@ import MovieForm from "./MovieForm";
 import MoviesContainer from "../containers/MoviesContainer";
 import MoviesCard from "./MoviesCard";
 import EditMovies from "./EditMovie";
+import Profile from "./Profile";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -26,14 +27,17 @@ function App() {
       <NavBar user={user} setUser={setUser} />
       <main>
         <Switch>
+           <Route path="/profile">
+            <Profile user={user} />
+          </Route> 
           <Route path="/movies/new">
-            <MovieForm />
+            <MovieForm user={user} />
           </Route>
           <Route path="/movies/:id/edit">
             <EditMovies />
           </Route>
           <Route path="/movies/:id">
-            <MoviesCard />
+            <MoviesCard user={user} />
           </Route>
           <Route path="/movies">
             <MoviesContainer />

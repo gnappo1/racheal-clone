@@ -8,7 +8,7 @@ class Api::MoviesController < ApplicationController
     end
 
     def show
-        movie = Movie.find_by(id: params[:id])
+        movie = Movie.find_by!(id: params[:id])
         render json: movie
     end
 
@@ -18,13 +18,13 @@ class Api::MoviesController < ApplicationController
     end
 
     def update
-        movie = Movie.find_by(id: params[:id])
+        movie = Movie.find_by!(id: params[:id])
         movie&.update!(movie_params)
         render json: movie, status: :created
         end
 
     def destroy
-        movie = Movie.find_by(id: params[:id])
+        movie = Movie.find_by!(id: params[:id])
         movie&.destroy
         render json: {}, status: :no_content
     end

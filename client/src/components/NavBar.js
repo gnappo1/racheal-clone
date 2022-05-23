@@ -18,12 +18,15 @@ function NavBar({ user, setUser }) {
         <Link to="/">Movie App</Link>
       </Logo>
       <Nav>
+        <welcome>
+      Signed in as: <a href="/profile">{user.username}</a>
+      </welcome>
       <Button as={Link} to="/movies">
         Movies
         </Button>
-        <Button as={Link} to="/movies/new">
+        {(user.role === "admin") ? (<Button as={Link} to="/movies/new">
           New Movie
-        </Button>
+        </Button>) : null }
         <Button variant="outline" onClick={handleLogoutClick}>
           Logout
         </Button>
@@ -31,6 +34,10 @@ function NavBar({ user, setUser }) {
     </Wrapper>
   );
 }
+
+const Welcome = styled.h5`
+	text-transform: uppercase;
+`
 
 const Wrapper = styled.header`
   display: flex;

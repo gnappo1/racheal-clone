@@ -2,10 +2,11 @@ import {useState, useEffect} from "react"
 import {Link, useParams, useLocation, useHistory} from "react-router-dom"
  import WatchlistForm from "./WatchlistForm"
 //import EditMovie from "./EditMovie"
+import Watchlistlists from "./Watchlistlists"
 import "./styles.css"
 import YoutubeEmbed from "./YoutubeEmbed"
 
-function MoviesCard({movie, deleteMovie}) {
+function MoviesCard({movie, deleteMovie, user}) {
     const {id} = useParams()
     const location = useLocation()
     const [movieObj, setMovieObj] = useState(null);
@@ -50,10 +51,16 @@ function MoviesCard({movie, deleteMovie}) {
          <h4>Title: <Link style= {{textDecoration: "none", color: "black"}} to={`/movies/${finalMovie.id}`}>{finalMovie.title}</Link></h4>
         
          
+         {user?.role === "admin" ?
+         <>
          {location.pathname !== "/movies" ? <>
+         
          <Link to={`/movies/${finalMovie.id}/edit`}> 
          <button name="edit" id="edit-btn" onClick={() => setEdit(edit)}>Edit</button></Link>
          <button name="delete" id="delete-btn" onClick={handleDelete}>Delete</button>
+         </> :null} 
+         </> : null}
+         {location.pathname !== "/movies" ? ( <>
          <h3>Comments:  </h3>
          <WatchlistForm movieId={finalMovie.id} addNewWatchlist={addNewWatchlist} />
          
@@ -64,7 +71,8 @@ function MoviesCard({movie, deleteMovie}) {
              </li>
          ))}
          </ul>
-         </> : null }
+         <Watchlistlists watchlists={watchlists} />
+         </> ): null }
         
     </div>
   )

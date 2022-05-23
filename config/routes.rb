@@ -3,7 +3,7 @@ Rails.application.routes.draw do
      resources :movies do 
       resources :watchlists, only: [:create]
      end
-     resources :users, only: [:update, :destroy]
+     resources :users, only: [:show, :update, :destroy]
     post "/signup", to: "users#create"
     get "/me", to: "users#show"
     post "/login", to: "sessions#create"
