@@ -12,7 +12,7 @@ function MoviesCard({movie, deleteMovie, user}) {
     const [movieObj, setMovieObj] = useState(null);
     const [edit, setEdit] = useState(false);
     const history = useHistory()
-    const [watchlists, setWatchlists] = useState([])
+    const [watchlists, setWatchlists] = useState(movie?.watchlists)
 
     useEffect(() => {   
         if (!movie) {
@@ -20,6 +20,7 @@ function MoviesCard({movie, deleteMovie, user}) {
             .then(resp => resp.json())
             .then(movie => {
               setMovieObj(movie)
+              setWatchlists(movie.watchlists)
             })
         }
     }, [movie, id]);
@@ -36,12 +37,13 @@ function MoviesCard({movie, deleteMovie, user}) {
     if (!finalMovie) return <h1>Loading...</h1>
 
     function handleDelete() {
-        fetch(`/api/movies/${movie.id}`, {
+        fetch(`/api/movies/${finalMovie.id}`, {
           method: "DELETE",
         })
-          .then(() => history.push("/movies"))
-    
-            deleteMovie(movie.id)
+        .then(() => {
+          deleteMovie(finalMovie.id)
+          history.push("/movies")
+        })
       }
   return (
     <div className="movie-card">
@@ -64,13 +66,13 @@ function MoviesCard({movie, deleteMovie, user}) {
          <h3>Comments:  </h3>
          <WatchlistForm movieId={finalMovie.id} addNewWatchlist={addNewWatchlist} />
          
-         <ul>{finalMovie.comments.map((comment) => (
+         {/* <ul>{finalMovie.comments.map((comment) => (
              <li>
                  <h5>Rating: {comment.rating}</h5>
                  <h5>Comment: {comment.comment}</h5>
              </li>
          ))}
-         </ul>
+         </ul> */}
          <Watchlistlists watchlists={watchlists} />
          </> ): null }
         

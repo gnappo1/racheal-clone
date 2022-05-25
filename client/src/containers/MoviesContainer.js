@@ -14,9 +14,7 @@ function MoviesContainer() {
 
     function deleteMovie(id){
       const moviesFiltered = movies.filter(m => m.id !== id);
-      console.log(id)
-          setMovies(moviesFiltered);
-          console.log(movies)
+      setMovies(moviesFiltered);
     }
   return (
     <div className='movie-container'>
